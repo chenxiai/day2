@@ -1,0 +1,7 @@
+1: github注册账号和密码
+
+2: 安装git客户端,并且让pycharm关联git客户端
+
+3: 创建一个项目,通过VCS菜单把项目转化为仓库
+
+4: 单击项目右键-->git-->commit(本地) and push(远程)
