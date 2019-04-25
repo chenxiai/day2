@@ -24,13 +24,20 @@ X = std.fit_transform(X)
 #  4: 划分测试集和训练集
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=1)
 
-knn = KNeighborsClassifier(n_neighbors=10)
-# 传入训练集特征值,和目标值训练模型
-knn.fit(X_train, y_train)
+# 7: 模型的保存与使用
+try:
+    knn = joblib.load("./data/knn.pkl")
+    print('已加载模型,直接测试')
+except FileNotFoundError:
+    print('还没有模型,应该新建模型')
+    knn = KNeighborsClassifier(n_neighbors=10)
+    # 传入训练集特征值,和目标值训练模型
+    knn.fit(X_train, y_train)
+    # 把训练成功的模型进行保存
+    joblib.dump(knn, "./data/knn.pkl")
+
 # 根据模型测试数据, 返回测试集的预测值
 y_predict = knn.predict(X_test)
 print('推荐酒店地址:' , y_predict)
 # 通过预测值与真实值比较,可以获取正确率
 print('测试得分', knn.score(X_test, y_test))
-# 6：评估 (网格搜索)
-
